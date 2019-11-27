@@ -10,9 +10,9 @@ Perform a [BLAST search](https://www.uniprot.org/blast/) with our input sequence
 
 >YYFPFNGRQAEDYLRSKERGEFVIRQSSRGDDHLVITWKLDKDLFQHIDIQELEKENPLALGKVLIVDNQKYNDLDQIIVEY
 
-on UniProt (Should we use a different database? e.g. UniProtKB/humans, UniprotKB/swiss-prot, UniRef90, ...). I've used `BLOSUM-62` substitution matrix, allowed gaps in the comparison and returned 250 hits.
+on UniProtKB/humans using `BLOSUM-62` substitution matrix, allowed gaps in the comparison and returned at most 250 hits.
 
-Output is saved in `data/BLAST_UniProt_250.fasta`
+Output is saved in `data/BLAST_uniprot_human.fasta`
 
 ### 2: Generate a multiple sequence alignment (MSA)
 
@@ -27,7 +27,7 @@ We should understand if we need to edit rows and columns.
 We can do it with 
 
 ```
-psiblast -subject data/BLAST_UniProt_250.fasta -in_msa data/MSA_clustalomega.fasta -out_pssm data/profile.pssm
+psiblast -subject data/BLAST_uniprot_human.fasta -in_msa data/MSA_clustalomega.fasta -out_pssm data/profile.pssm
 ```
 
 Output profile saved in `data/profile.pssm`.
@@ -45,4 +45,11 @@ HMM model saved in `models/hmm_model.hmm`.
 
 ### 5: Evaluate the model against human proteins available in SwissProt
 
-...
+The reference database is saved in `data/SwissProt_reference.fasta`. It can be obtained with the following query on UniProt 
+>database:(type:pfam pf00017) AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]"
+
+
+
+## Notes
+
+* Reference database used in the first part of the project `SwissProt_reference.fasta`. It can be obtained with the following query on UniProt `database:(type:pfam pf00017) AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]"`
