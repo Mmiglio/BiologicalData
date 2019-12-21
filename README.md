@@ -10,9 +10,9 @@ Perform a [BLAST search](https://www.uniprot.org/blast/) with our input sequence
 
 >YYFPFNGRQAEDYLRSKERGEFVIRQSSRGDDHLVITWKLDKDLFQHIDIQELEKENPLALGKVLIVDNQKYNDLDQIIVEY
 
-on UniProtKB/humans using `BLOSUM-62` substitution matrix, allowed gaps in the comparison and returned at most 250 hits.
+on UniRef90 (suggested by prof. Piovesan) using `BLOSUM-62` substitution matrix, allowed gaps in the comparison and returned at most 500 hits.
 
-Output is saved in `data/BLAST_uniprot_human.fasta`
+Output is saved in `data/BLAST_uniref90.fasta`
 
 ### 2: Generate a multiple sequence alignment (MSA)
 
@@ -20,7 +20,7 @@ We can align sequences using [CLUSTAL Omega](https://www.ebi.ac.uk/Tools/msa/clu
 
 Result of the alignment is saved in `data/MSA_clustalomega.fasta`. 
 
-We should understand if we need to edit rows and columns.
+We should understand if we need to edit rows and columns -> Open it using Jalview and manually edit sequences.
 
 ### 3: Build a PSSM model starting from the MSA using BLAST
 
@@ -53,3 +53,4 @@ The reference database is saved in `data/SwissProt_reference.fasta`. It can be o
 ## Notes
 
 * Reference database used in the first part of the project `SwissProt_reference.fasta`. It can be obtained with the following query on UniProt `database:(type:pfam pf00017) AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]"`
+* To visualize the generate PSSM use the following command `psiblast -subject data/BLAST_uniprot_human.fasta -in_msa data/MSA_clustalomega.fasta -out_ascii_pssm test`
