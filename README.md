@@ -20,7 +20,7 @@ We can align sequences using [CLUSTAL Omega](https://www.ebi.ac.uk/Tools/msa/clu
 
 Result of the alignment is saved in `data/MSA_clustalomega.fasta`. 
 
-We should understand if we need to edit rows and columns -> Open it using Jalview and manually edit sequences.
+File edited usign Jalview is saved in `data/MSA_clustalomega_edited.fasta`.
 
 ### 3: Build a PSSM model starting from the MSA using BLAST
 
@@ -32,13 +32,11 @@ psiblast -subject data/BLAST_uniprot_human.fasta -in_msa data/MSA_clustalomega.f
 
 Output profile saved in `data/profile.pssm`.
 
-Does it make any sense? I'm using a blast result as subject... 
-
 ### 4: Build a HMM model starting from the MSA using HMMER
 
 If previous steps are correct it should be something like
 ```
-hmmbuild models/hmm_model.hmm data/MSA_clustalomega.fasta
+hmmbuild models/hmm_model.hmm data/MSA_clustalomega_edited.fasta
 ```
 
 HMM model saved in `models/hmm_model.hmm`.
