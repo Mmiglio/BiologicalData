@@ -5,7 +5,7 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # query HMM file:                  models/hmm_model.hmm
 # target sequence database:        data/SwissProt_humans_reference.fasta
-# per-seq hits tabular output:     data/hmmsearch.hmmer_tblout
+# per-dom hits tabular output:     data/hmmsearch.hmmer_domtblout
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 Query:       MSA_clustalomega_edited  [M=226]
@@ -88,6 +88,6 @@ Passed Fwd filter:                         4  (0.04); expected 0.0 (1e-05)
 Initial search space (Z):                100  [actual number of targets]
 Domain search space  (domZ):               4  [number of targets reported over threshold]
 # CPU time: 0.01u 0.00s 00:00:00.01 Elapsed: 00:00:00.01
-# Mc/sec: 734.24
+# Mc/sec: 810.88
 //
 [ok]

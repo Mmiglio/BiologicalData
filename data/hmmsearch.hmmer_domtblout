@@ -1,0 +1,18 @@
+#                                                                                --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+# target name         accession   tlen query name              accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+# ------------------- ---------- -----    -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+sp|O14508|SOCS2_HUMAN -            198 MSA_clustalomega_edited -            226   1.5e-05   17.2   0.0   1   1   8.3e-07   2.1e-05   16.7   0.0    85   166    50   130    46   138 0.72 Suppressor of cytokine signaling 2 OS=Homo sapiens OX=9606 GN=SOCS2 PE=1 SV=1
+sp|O75791|GRAP2_HUMAN -            330 MSA_clustalomega_edited -            226   8.8e-05   14.6   1.4   1   2   5.3e-06   0.00013   14.0   0.0    87   142    62   116    41   131 0.88 GRB2-related adapter protein 2 OS=Homo sapiens OX=9606 GN=GRAP2 PE=1 SV=1
+sp|O75791|GRAP2_HUMAN -            330 MSA_clustalomega_edited -            226   8.8e-05   14.6   1.4   2   2      0.36         9   -1.8   0.6    68    87   211   230   184   233 0.77 GRB2-related adapter protein 2 OS=Homo sapiens OX=9606 GN=GRAP2 PE=1 SV=1
+sp|P52735|VAV2_HUMAN  -            878 MSA_clustalomega_edited -            226   0.00012   14.2   0.0   1   1   1.2e-05   0.00031   12.9   0.0    83   138   672   727   663   775 0.89 Guanine nucleotide exchange factor VAV2 OS=Homo sapiens OX=9606 GN=VAV2 PE=1 SV=2
+sp|Q8IZW8|TENS4_HUMAN -            715 MSA_clustalomega_edited -            226   0.00021   13.4   0.0   1   1   1.3e-05   0.00032   12.8   0.0    87   124   453   490   442   492 0.87 Tensin-4 OS=Homo sapiens OX=9606 GN=TNS4 PE=1 SV=3
+#
+# Program:         hmmsearch
+# Version:         3.2.1 (June 2018)
+# Pipeline mode:   SEARCH
+# Query file:      models/hmm_model.hmm
+# Target file:     data/SwissProt_humans_reference.fasta
+# Option settings: hmmsearch --domtblout data/hmmsearch.hmmer_domtblout models/hmm_model.hmm data/SwissProt_humans_reference.fasta 
+# Current dir:     /Users/matteo/work/BiologicalData/BiologicalData
+# Date:            Sun Dec 29 19:35:45 2019
+# [ok]

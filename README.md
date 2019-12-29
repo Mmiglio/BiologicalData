@@ -60,14 +60,14 @@ You can test if it is working correctly by searching a sequence in the database:
 
 We can now search in the database usign PSI-BLAST with the pssm generated in step 3:
 
->psiblast -in_pssm data/profile.pssm -db data/SwissProt_humans_reference.fasta -outfmt 5 -out data/psiblast_search.xml -num_iterations 3 -evalue 0.001
+>psiblast -in_pssm data/profile.pssm -db data/SwissProt_humans_reference.fasta -outfmt 6 -num_iterations 3 -evalue 0.001 > data/psiblast_search.txt
 
-The output is saved in `data/psiblast_search.xml`. If you want to print the results on screen remove from the command `-outfmt 5 -out data/psiblast_search.xml`.
+The output is saved in `data/psiblast_search.txt`. If you want to print the results on screen remove from the command `> data/psiblast_search.txt`.
 
 The search with HMMER is performed with the following command:
-> hmmsearch --tblout data/hmmsearch.hmmer_tblout models/hmm_model.hmm data/SwissProt_humans_reference.fasta > data/hmmsearch_results.hmmer_align
+> hmmsearch --domtblout data/hmmsearch.hmmer_domtblout models/hmm_model.hmm data/SwissProt_humans_reference.fasta > data/hmmsearch_results.hmmer_align
 
-and it generates two outputs `data/hmmsearch.hmmer_tblout` and `data/hmmsearch_results.hmmer_align`.
+and it generates two outputs `data/hmmsearch.hmmer_domtblout` and `data/hmmsearch_results.hmmer_align`.
 
 #### c: Evaluate the ability of retrieving proteins with that domain.
 
