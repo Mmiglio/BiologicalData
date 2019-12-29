@@ -43,8 +43,18 @@ HMM model saved in `models/hmm_model.hmm`.
 
 ### 5: Evaluate the model against human proteins available in SwissProt
 
+Use metrics such as accuracy, precision, sensitivity, specificity and MCC (Matthews Correlation Coefficient). 
+The evaluation is composed by the steps described below.
+
+#### a: Define you ground truth/reference 
 The reference database is saved in `data/SwissProt_reference.fasta`. It can be obtained with the following query on UniProt 
 >database:(type:pfam pf00017) AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]"
+
+#### b: Find significant hits using HMM-SEARCH and PSI-BLAST respectively for the HMM and PSSM model
+
+#### c: Evaluate the ability of retrieving proteins with that domain.
+
+#### d: Evaluate the ability of matching the domain position, i.e. the alignment position of the model in the retrieved proteins (Pfam reference position is available in InterPro).
 
 
 
