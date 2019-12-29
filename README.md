@@ -50,7 +50,24 @@ The evaluation is composed by the steps described below.
 The reference database is saved in `data/SwissProt_reference.fasta`. It can be obtained with the following query on UniProt 
 >database:(type:pfam pf00017) AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]"
 
+We can use it to create a database (Blast indexes, phr+pin+psq files) that will be used by HMM-SEARCH and PSI-BLAST to retrieve proteins:
+>makeblastdb -dbtype prot -in data/SwissProt_humans_reference.fasta -parse_seqids
+
+You can test if it is working correctly by searching a sequence in the database:
+>blastdbcmd -entry "CRK_HUMAN" -db data/SwissProt_humans_reference.fasta
+
 #### b: Find significant hits using HMM-SEARCH and PSI-BLAST respectively for the HMM and PSSM model
+
+We can now search in the database usign PSI-BLAST with the pssm generated in step 3:
+
+>psiblast -in_pssm data/profile.pssm -db data/SwissProt_humans_reference.fasta -outfmt 5 -out data/psiblast_search.xml -num_iterations 3 -evalue 0.001
+
+The output is saved in `data/psiblast_search.xml`. If you want to print the results on screen remove from the command `-outfmt 5 -out data/psiblast_search.xml`.
+
+The search with HMMER is performed with the following command:
+> hmmsearch --tblout data/hmmsearch.hmmer_tblout models/hmm_model.hmm data/SwissProt_humans_reference.fasta > data/hmmsearch_results.hmmer_align
+
+and it generates two outputs `data/hmmsearch.hmmer_tblout` and `data/hmmsearch_results.hmmer_align`.
 
 #### c: Evaluate the ability of retrieving proteins with that domain.
 
