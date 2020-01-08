@@ -20,23 +20,27 @@ We can align sequences using [CLUSTAL Omega](https://www.ebi.ac.uk/Tools/msa/clu
 
 Result of the alignment is saved in `data/MSA_clustalomega.fasta`. 
 
+### Edit 1
 File edited usign Jalview is saved in `data/MSA_clustalomega_edited.fasta`.
+
+### Edit 2
+File `data/MSA_clustalomega_soloseq.fasta` obtained by keeping only nucleotides aligned with the starting sequence, 118 (counting gaps) with respect to 81 starting nucleotides (as done in Pfam).
 
 ### 3: Build a PSSM model starting from the MSA using BLAST
 
 We can do it with 
 
 ```
-psiblast -subject data/BLAST_uniprot_human.fasta -in_msa data/MSA_clustalomega.fasta -out_pssm data/profile.pssm
+psiblast -subject data/BLAST_uniref90.fasta -in_msa data/MSA_clustalomega_soloseq.fasta -out_pssm models/profile.pssm
 ```
 
-Output profile saved in `data/profile.pssm`.
+Output profile saved in `models/profile.pssm`.
 
 ### 4: Build a HMM model starting from the MSA using HMMER
 
 If previous steps are correct it should be something like
 ```
-hmmbuild models/hmm_model.hmm data/MSA_clustalomega_edited.fasta
+hmmbuild models/hmm_model.hmm data/MSA_clustalomega_soloseq.fasta
 ```
 
 HMM model saved in `models/hmm_model.hmm`.
@@ -60,14 +64,14 @@ You can test if it is working correctly by searching a sequence in the database:
 
 We can now search in the database usign PSI-BLAST with the pssm generated in step 3:
 
->psiblast -in_pssm data/profile.pssm -db data/SwissProt_humans_reference.fasta -outfmt 6 -num_iterations 3 -evalue 0.001 > data/psiblast_search.txt
+>psiblast -in_pssm models/profile.pssm -db data/SwissProt_humans_reference.fasta -outfmt 6 -num_iterations 3 -evalue 0.001 > results/psiblast_search.txt
 
-The output is saved in `data/psiblast_search.txt`. If you want to print the results on screen remove from the command `> data/psiblast_search.txt`.
+The output is saved in `results/psiblast_search.txt`. If you want to print the results on screen remove from the command `> results/psiblast_search.txt`.
 
 The search with HMMER is performed with the following command:
-> hmmsearch --domtblout data/hmmsearch.hmmer_domtblout models/hmm_model.hmm data/SwissProt_humans_reference.fasta > data/hmmsearch_results.hmmer_align
+> hmmsearch --domtblout results/hmmsearch.hmmer_domtblout models/hmm_model.hmm data/SwissProt_humans_reference.fasta > results/hmmsearch_results.hmmer_align
 
-and it generates two outputs `data/hmmsearch.hmmer_domtblout` and `data/hmmsearch_results.hmmer_align`.
+and it generates two outputs `results/hmmsearch.hmmer_domtblout` and `results/hmmsearch_results.hmmer_align`.
 
 #### c: Evaluate the ability of retrieving proteins with that domain.
 

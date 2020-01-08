@@ -1,5 +1,5 @@
 sequences_psiblast = []
-with open("data/psiblast_search.txt") as f:
+with open("results/psiblast_search.txt") as f:
     for line in f:
         if line:
             qseqid, sseqid, pident, length, mismatch, gapopen, qstart, qend, sstart, send, evalue, bitscore = line.strip().split()
@@ -8,7 +8,7 @@ with open("data/psiblast_search.txt") as f:
 print("Number of hits retrieved usign psi-blast: {}".format(len(sequences_psiblast)))
 
 sequences_hmm = []
-with open("data/hmmsearch.hmmer_domtblout") as f:
+with open("results/hmmsearch.hmmer_domtblout") as f:
     for line in f:
         if line[0] != "#":
             target, tacc, tlen, query, qacc, qlen, \
@@ -17,4 +17,3 @@ with open("data/hmmsearch.hmmer_domtblout") as f:
             tacc = target.split("|")[1]
             sequences_hmm.append(tacc)
 print("Number of hits retrieved usign hmmsearch: {}".format(len(sequences_hmm)))
-print
