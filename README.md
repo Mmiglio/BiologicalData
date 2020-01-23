@@ -20,7 +20,7 @@ Output is also saved as XML-file in `data/BLAST_uniref90.xml`. This file can be 
 
 We can align sequences using [CLUSTAL Omega](https://www.ebi.ac.uk/Tools/msa/clustalo/). Remember to set output to `Pearson/FASTA`. 
 
-* Result of the alignment performed using `data/BLAST_uniref90.fasta` is saved in `data/MSA_clustalomega.fasta`. Result of the aligne
+* Result of the alignment performed using `data/BLAST_uniref90.fasta` is saved in `data/MSA_clustalomega.fasta`.
 * Result of the alignment performed using `data/BLAST_uniref90_cut.fasta` is saved in `data/MSA_clustalomega_cut.fasta`.
 
 ### Edit 1
