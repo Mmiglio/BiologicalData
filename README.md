@@ -14,17 +14,21 @@ on UniRef90 (suggested by prof. Piovesan) using `BLOSUM-62` substitution matrix,
 
 Output is saved in `data/BLAST_uniref90.fasta`
 
+Output is also saved as XML-file in `data/BLAST_uniref90.xml`. This file can be parsed using `code/ParseUniprotBlast.py`: this will create a new fasta file containing cut sequences (from the blast alignment information) saved as fasta in `data/BLAST_uniref90_cut.fasta`.
+
 ### 2: Generate a multiple sequence alignment (MSA)
 
 We can align sequences using [CLUSTAL Omega](https://www.ebi.ac.uk/Tools/msa/clustalo/). Remember to set output to `Pearson/FASTA`. 
 
-Result of the alignment is saved in `data/MSA_clustalomega.fasta`. 
+* Result of the alignment performed using `data/BLAST_uniref90.fasta` is saved in `data/MSA_clustalomega.fasta`. Result of the aligne
+* Result of the alignment performed using `data/BLAST_uniref90_cut.fasta` is saved in `data/MSA_clustalomega_cut.fasta`.
 
 ### Edit 1
 File edited usign Jalview is saved in `data/MSA_clustalomega_edited.fasta`.
 
 ### Edit 2
 File `data/MSA_clustalomega_soloseq.fasta` obtained by keeping only nucleotides aligned with the starting sequence, 118 (counting gaps) with respect to 81 starting nucleotides (as done in Pfam).
+
 
 ### 3: Build a PSSM model starting from the MSA using BLAST
 
