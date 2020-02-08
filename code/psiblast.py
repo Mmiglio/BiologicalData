@@ -8,7 +8,7 @@ from utils import evaluatePositionsSH2, evaluateSequencesSH2
 # Path where generated profile will be stored
 PROFILE_PATH = "../models/profile.pssm"
 # Path of the dataset used to create the profile
-INPUT_DATA_PATH = "../data/BLAST_uniref90.fasta"
+SUBJECT_PATH = "../data/sequenceP23615.fasta"
 # Path of the multiple sequence alignment
 MSA_PATH = "../data/PF00017_seed.fasta"
 
@@ -16,6 +16,10 @@ MSA_PATH = "../data/PF00017_seed.fasta"
 SEARCH_RESULT_PATH = "../results/psiblast_search.txt"
 # Database used to perform the search
 SEARCH_DB = "../data/SwissProt_humans_reference_all.fasta"
+# number of iterations
+ITERATIONS = 4
+# evalue for the search
+EVALUE = 0.01
 
 #### Reference datasets ####
 
@@ -31,7 +35,7 @@ def main():
     # Create pssm
     create_profile(
         profile_path = PROFILE_PATH,
-        data_path = INPUT_DATA_PATH,
+        subject_path = SUBJECT_PATH,
         msa_path = MSA_PATH
     )
 
@@ -39,7 +43,9 @@ def main():
     search_psiblast(
         result_path = SEARCH_RESULT_PATH,
         pssm_path = PROFILE_PATH,
-        db_path = SEARCH_DB
+        db_path = SEARCH_DB,
+        iterations=ITERATIONS,
+        evalue=EVALUE
     )
 
     # parse search result

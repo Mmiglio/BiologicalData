@@ -1,7 +1,7 @@
 import subprocess
 from subprocess import DEVNULL
 
-def create_profile(profile_path, data_path, msa_path):
+def create_profile(profile_path, subject_path, msa_path):
     cmd = """
     rm {0}
     psiblast -subject {1} \
@@ -9,7 +9,7 @@ def create_profile(profile_path, data_path, msa_path):
              -out_pssm {0} 
     """.format(
         profile_path,
-        data_path,
+        subject_path,
         msa_path
     )
     
@@ -40,15 +40,17 @@ def create_hmm(model_path, msa_path):
     print("\nCreate HMM! Saved as {}\n".format(model_path))
 
 
-def search_psiblast(result_path, pssm_path, db_path):
+def search_psiblast(result_path, pssm_path, db_path, iterations=3, evalue=0.001):
     cmd = """
     rm {0}
     psiblast -in_pssm {1} -db {2} \
-         -outfmt 6 -num_iterations 3 -evalue 0.001 > {0}
+         -outfmt 6 -num_iterations {3} -evalue {4} > {0}
     """.format(
         result_path,
         pssm_path,
-        db_path
+        db_path,
+        iterations,
+        evalue
     )
 
     results = subprocess.run(
