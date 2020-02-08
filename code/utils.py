@@ -1,7 +1,9 @@
 import math
 
 def computeMetrics(true_positive, true_negative, false_positive, false_negative):
-    
+    """
+    Compute a set of metrics starting from true positives, true negatives etc.
+    """
     accuracy = (true_positive + true_negative) / (true_positive + true_negative + false_negative + false_positive)
     precision = true_positive / (true_positive + false_positive)
     sensitivity = true_positive / (true_positive + false_negative)

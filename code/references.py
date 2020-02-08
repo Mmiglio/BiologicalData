@@ -1,9 +1,11 @@
 from Bio import SeqIO
 import json
 
+
 def getHumanSH2(fasta_path):
     """
     Return a set of sequences {'P16885', ...}
+    These are the human sequences containing SH2
     """
     human_sh2 = SeqIO.parse(fasta_path,'fasta')
     list_human_sh2 = []
@@ -15,20 +17,17 @@ def getHumanSH2(fasta_path):
     print("There are {} human proteins containing SH2 domain in SwissProt".format(len(list_human_sh2)))
     return set_human_sh2
 
-def countSequences(fasta_path):
-    seq = SeqIO.parse(fasta_path, 'fasta')
-    list_seq = []
-    for sequence in seq:
-        name = sequence.id # name is in the form sp|P46108|CRK_HUMAN
-        list_seq.append(name.split('|')[1])
-    print("There are {} human proteins in SwissProt".format(len(list_seq)))
-    return len(list_seq)
 
 def getPositionReference(json_path):
     """
     return dict of the type
     {'P16885' :{'length': 1265,
-               'positions': [{'start': 532, 'end': 617}, {'start': 646, 'end': 720}]}}
+               'positions': [{'start': 532, 'end': 617}, {'start': 646, 'end': 720}]},
+      ....           
+    }
+    Keys are sequences in the reference json downloaded from interpro and values are dict
+    containing position of SH2 domain (pf00017). The length of the sequence is needed to 
+    compute the metrics later.
     """
     with open(json_path, "r") as file:
         interpro_data = json.load(file)       
@@ -57,6 +56,14 @@ def getPositionReference(json_path):
     return reference_sh2_positions
 
 
-
-    
-
+def countSequences(fasta_path):
+    """
+    Count number of sequences (can also return the list)
+    """
+    seq = SeqIO.parse(fasta_path, 'fasta')
+    list_seq = []
+    for sequence in seq:
+        name = sequence.id # name is in the form sp|P46108|CRK_HUMAN
+        list_seq.append(name.split('|')[1])
+    print("There are {} human proteins in SwissProt".format(len(list_seq)))
+    return len(list_seq)
