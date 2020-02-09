@@ -16,7 +16,7 @@ SEARCH_RESULT_PATH = "../results/hmmsearch.hmmer_domtblout"
 SEARCH_DB = "../data/SwissProt_humans_reference_all.fasta"
 
 # save retrieved hits on the "original dataset"
-SAVE_HITS = True
+SAVE_HITS = False
 
 #### Reference datasets ####
 # File containing reviewed human sequences with SH2 domain
@@ -59,6 +59,7 @@ def main():
 
     # Create "original dataset" with retrieved hits
     if SAVE_HITS:
+        print("Saving hits on the original dataset")
         with open('../datasets/original.txt', 'w') as fout:
             for seqId in hmm_sh2_positions.keys():
                 fout.write("{}\n".format(seqId))

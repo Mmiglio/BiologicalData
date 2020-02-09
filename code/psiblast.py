@@ -68,6 +68,7 @@ def main():
 
     # Create "original dataset" with retrieved hits
     if SAVE_HITS:
+        print("Saving hits on the original dataset")
         with open('../datasets/original.txt', 'w') as fout:
             for seqId in psiblast_sh2_positions.keys():
                 fout.write("{}\n".format(seqId))
