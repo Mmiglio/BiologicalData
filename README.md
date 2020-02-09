@@ -82,7 +82,13 @@ and it generates two outputs `results/hmmsearch.hmmer_domtblout` and `results/hm
 #### d: Evaluate the ability of matching the domain position, i.e. the alignment position of the model in the retrieved proteins (Pfam reference position is available in InterPro).
 
 
+## Domain family characterization
+### Annotation enrichment
+### Structural Classification
+#### CATH
+CATH architectures mapping to our domain can be found at http://www.cathdb.info/version/v4_2_0/superfamily/3.30.505.10
 
+#### PDB
 ## Notes
 
 * Reference database used in the first part of the project `SwissProt_reference.fasta`. It can be obtained with the following query on UniProt `database:(type:pfam pf00017) AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]"`
