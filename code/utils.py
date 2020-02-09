@@ -85,6 +85,20 @@ def evaluatePositionsSH2(predicted_positions_sh2, reference_positions_sh2):
             list_fp.append(false_positive)
             list_fn.append(false_negative)
             list_tn.append(true_negative)
+
+        else:
+            # false positive sequence
+            identified_positions = createPositionSet(predicted_positions_sh2[seqid])
+
+            true_positive = 0
+            false_positive = len(identified_positions)
+            false_negative = 0
+            true_negative = 0
+
+            list_tp.append(true_positive)
+            list_fp.append(false_positive)
+            list_fn.append(false_negative)
+            list_tn.append(true_negative)
             
     computeMetrics(
         true_positive=sum(list_tp),

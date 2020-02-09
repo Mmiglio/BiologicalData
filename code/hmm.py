@@ -15,8 +15,10 @@ SEARCH_RESULT_PATH = "../results/hmmsearch.hmmer_domtblout"
 # Database used to perform the search
 SEARCH_DB = "../data/SwissProt_humans_reference_all.fasta"
 
-#### Reference datasets ####
+# save retrieved hits on the "original dataset"
+SAVE_HITS = True
 
+#### Reference datasets ####
 # File containing reviewed human sequences with SH2 domain
 PATH_SEQUENCES_HUMAN_SH2 = "../data/SwissProt_humans_reference.fasta"
 # File containing all eviewed human sequences
@@ -54,6 +56,12 @@ def main():
     # Evaluate ability of matching domains
     print("\nAbility of matching domains")
     evaluatePositionsSH2(hmm_sh2_positions, reference_sh2_positions)
+
+    # Create "original dataset" with retrieved hits
+    if SAVE_HITS:
+        with open('../datasets/original.txt', 'w') as fout:
+            for seqId in hmm_sh2_positions.keys():
+                fout.write("{}\n".format(seqId))
 
 
 if __name__ == "__main__":
