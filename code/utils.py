@@ -85,10 +85,6 @@ def evaluatePositionsSH2(predicted_positions_sh2, reference_positions_sh2):
             list_fp.append(false_positive)
             list_fn.append(false_negative)
             list_tn.append(true_negative)
-
-        #else:
-        #    print("Error! sequence not found in the reference dataset -- False positive")   
-        #    break
             
     computeMetrics(
         true_positive=sum(list_tp),
