@@ -2,6 +2,7 @@ from models import create_hmm, search_hmm
 from references import getHumanSH2, getPositionReference, countSequences
 from utils import evaluatePositionsSH2, evaluateSequencesSH2
 from parsers import parseHmmerOutput
+import os
 
 #### Hmmer model  #####
 
@@ -66,4 +67,7 @@ def main():
 
 
 if __name__ == "__main__":
+    # set working directory
+    os.chdir(os.path.abspath(os.path.dirname(__file__)))
+
     main()

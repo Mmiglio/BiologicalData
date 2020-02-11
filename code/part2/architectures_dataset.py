@@ -2,6 +2,7 @@ import urllib.request
 import urllib.parse
 import json
 import re
+import os
 
 ORIGINAL_DATASET = "../../datasets/original.txt"
 ARCHITECTURES_DATASET = "../../datasets/architectures_datasets.json"
@@ -75,4 +76,7 @@ def make_query(query_sequences):
     return response.decode('utf-8')
 
 if __name__ == "__main__":
+    # set working directory
+    os.chdir(os.path.abspath(os.path.dirname(__file__)))
+
     main()

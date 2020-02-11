@@ -2,6 +2,7 @@ from models import create_profile, search_psiblast
 from parsers import parsePsiBlastOutput
 from references import getHumanSH2, getPositionReference, countSequences
 from utils import evaluatePositionsSH2, evaluateSequencesSH2
+import os
 
 #### Profile + psi-blast ####
 
@@ -75,4 +76,7 @@ def main():
 
 
 if __name__ == "__main__":
+    # set working directory
+    os.chdir(os.path.abspath(os.path.dirname(__file__)))
+    
     main()

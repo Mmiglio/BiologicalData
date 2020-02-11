@@ -1,5 +1,6 @@
 import subprocess
 from subprocess import DEVNULL
+import os
 
 def create_profile(profile_path, subject_path, msa_path):
     cmd = """
@@ -102,6 +103,9 @@ def search_jackhmmer(result_path, sequence_path, db_path, iterations=3, evalue=0
 
 
 if __name__ == "__main__":
+    # set working directory
+    os.chdir(os.path.abspath(os.path.dirname(__file__)))
+
     #tests 
     create_profile(
         profile_path = "../models/profile.pssm",
