@@ -26,16 +26,18 @@ def main():
     pdb_rel = pd.read_csv(PATH_PDB_UNIPROT_REL, sep = '\t', header = 1)
     pdb_rel.columns = list(map(lambda x: x.lower(), pdb_rel.columns.values))
     
-    pdb_dataset = pdb_rel.loc[pdb_rel.sp_primary.isin(original_proteins),['pdb','sp_primary','chain']].copy()
+    pdb_dataset = pdb_rel.loc[pdb_rel.sp_primary.isin(original_proteins),['pdb','sp_primary','chain','sp_beg','sp_end']].copy()
 
     # Create final version of the PDB dataset: original proteins in PDB + human proteins with same chain as the originals
     frames = [pdb_dataset, pdb_rel[(pdb_rel.pdb.isin(pdb_dataset.pdb)) & 
               ~(pdb_rel.sp_primary.isin(pdb_dataset.sp_primary))
               & (pdb_rel.sp_primary.isin(list_human))]
               ]
-    pdb_dataset = pd.concat(frames, sort = False)[['pdb','sp_primary','chain']]
+    pdb_dataset = pd.concat(frames, sort = False)[
+        ['pdb','sp_primary','chain','sp_beg','sp_end']
+        ].reset_index(drop=True)
 
-    pdb_dataset.to_csv(OUTPUT_PATH)
+    pdb_dataset.to_csv(OUTPUT_PATH, index=False)
     print("Dataset saved as {}".format(OUTPUT_PATH))
 
 
