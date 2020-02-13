@@ -169,7 +169,7 @@ def fisher_test(d_count, bg_count, depth, l):
         # Perform Fisher Exact Test
         fisher_results = fisher_exact([[a, b],[not_a, not_b]])
         
-        # 3. Save results
+        # Create dataframe with results
         results.setdefault(key, {'OddRatio': fisher_results[0], 'p-value': fisher_results[1]})
     
     # Return the DataFrame
