@@ -16,7 +16,7 @@ def parse_gene_ontology(ontology):
     # in the following way:  nodes = list(labels.keys())
 
     # compute the dictionary of ancestors for each node
-    ancestors = get_ancestors(
+    ancestors = get_ancestors_go(
         nodes = list(labels.keys()),
         parents = parents
     )
@@ -28,6 +28,34 @@ def parse_gene_ontology(ontology):
     )
 
     return labels, ancestors, min_depth
+
+def parse_disease_ontology(do_ontology):
+
+    do = {}  # { do_id : do_object }
+    obj = {}  # { id: do_id, name: definition, xref: list_of_omim_ids, is_a: list_of_parents, is_obsolete: True } 
+    for line in do_ontology:
+        line = line.strip().split(": ")
+        if line and len(line) == 2:
+            k, v = line
+            if k == "id" and v.startswith("DOID:"):
+                obj["id"] = v.split(":")[1]
+            elif k == "xref" and "OMIM" in v:
+                obj["omim"] = v.split(":")[1]
+            elif k == "name":
+                obj["name"] = v
+            elif k == "is_a":
+                obj.setdefault("is_a", []).append(v.split()[0].split(":")[1])
+            elif k == "is_obsolete":
+                obj["is_obsolete"] = True
+        else:
+            if obj.get("id") and not obj.get("is_obsolete"):
+                do[obj["id"]] = obj
+            obj = {}
+        
+    # compute the dictionary of ancestors and depth for each node
+    labels, ancestors, depth = get_ancestors_do(do)
+    
+    return labels, ancestors, depth
 
 
 def get_parents(ontology):
@@ -54,7 +82,7 @@ def get_labels(ontology):
     return labels
 
 
-def get_ancestors(nodes, parents):
+def get_ancestors_go(nodes, parents):
     """
     Compute the list of ancestors for each node
     """
@@ -69,6 +97,39 @@ def get_ancestors(nodes, parents):
             node_parents = [term for parent in node_parents for term in parents.get(parent, [])]
         ancestors[node] = node_ancestors
     return ancestors
+
+def get_ancestors_do(do):
+    """
+    Retrive ancestors dict and depth dict for each node
+    """
+
+    ancestors = {}  # { term : list_of_ancestor_terms }
+    parents = {}
+    depth = {}
+    labels = {}
+    for node in do:
+        c = 0
+        node_ancestors = []
+        node_parents = do[node].get("is_a")
+        labels[node] = do[node].get("name")
+        if node_parents != None:
+            parents[node] = node_parents
+        else:
+            parents[node] = []
+        # Loop parent levels until no more parents
+        while node_parents:
+            c += 1
+            node_ancestors.extend(node_parents)
+            if "4" in node_parents:  # "4" is the root ID
+                depth[node] = c
+            # Get the parents of current parents (1 level up)
+            node_parents = [term for parent in node_parents for term in do[parent].get("is_a", [])]
+        ancestors[node] = set(node_ancestors)
+    # recompute depth... we are having some problems with this one
+    depth = get_min_depth(list(do.keys()), parents)
+     
+    return labels, ancestors, depth
+
 
 def get_min_depth(nodes, parents):   
     """
@@ -98,6 +159,47 @@ def map_protein_to_go(map_file):
         for acc, annotations in gen_block(f):
             protein_to_go[acc] = annotations
     return protein_to_go
+
+def map_protein_to_diseases(PUBMED_IDS_PATH, URL):
+    """
+    Retrieve diseases for each human protein from the abstracts of
+    PubMed papers about human proteins
+    """
+    
+    # Extract PUBmed ids about human proteins 
+    uniprot_pmid = {}  # { pmid : list_of_uniprot_ids }
+    with gzip.open(PUBMED_IDS_PATH) as f:
+        for line in f:
+            line = line.decode().strip().split("\t")
+            if len(line) == 3:
+                for pmid in line[2].split("; "):
+                    uniprot_pmid.setdefault(pmid, []).append(line[0])
+                    
+    # Delete header
+    del uniprot_pmid['PubMed ID']
+    
+    diseases = {}  # { uniprot_id : list_of_diseases }
+    pmids = list(uniprot_pmid)
+
+    for i in range(0, len(pmids), 8):
+        # Parameters definition for the query
+        params = {
+            "articleIds": ",".join(["MED:{}".format(pmid) for pmid in pmids[i:i+8]]),
+            "type": "Diseases",
+            "section": "Abstract",
+            "format": "JSON"
+        }
+        # Make query
+        r = requests.get(URL, params=params)
+        print(i, r.status_code)
+        obj = json.loads(r.text)
+        for ele in obj:
+            print(ele)
+            for annotation in ele.get("annotations"):
+                for uniprot_id in uniprot_pmid[ele["extId"]]:
+                    diseases.setdefault(uniprot_id, []).append(annotation["exact"])
+    diseases = {k: list(v) for k, v in diseases.items()}
+    return diseases
 
 def gen_block(f):
     """
@@ -130,7 +232,7 @@ def count_ancestors(protein_list, ancestors, protein_to_go):
     # the intersection between protein_list and protein_to_go.keys
     # is needed since not all human proteins are annotated
     for protein in set(protein_list).intersection(set(protein_to_go.keys())):
-        annotations = protein_to_go[protein]
+        annotations = set(protein_to_go[protein])
 
         terms_ancestors = copy.copy(annotations)  # annotations + ancestor terms
         for term in annotations:  # directly annotated terms

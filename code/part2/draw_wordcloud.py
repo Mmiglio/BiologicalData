@@ -66,32 +66,40 @@ class GroupedColorFunc(object):
         return self.get_color_func(word)(word, **kwargs)
 
 
-def draw_word_cloud(df, score='OddRatio', N=20, scale=2.0):
+def draw_word_cloud(df, score='OddRatio', N=20, under_represented=False, scale=2.0):
     """
     Draw first and last N descriptions of df
     Scale less abboundant terms by a factor scale
     """
-    head, tail = df[:N].copy(), df[-N:].copy()
-    
-    # invert score of tail dataframe
-    tail[score] = 1 / tail[score] * scale
-    
-    df_draw = pd.concat([head,tail], ignore_index=True)
+    if under_represented:
+        # draw also underepresented words
+        head, tail = df[:N].copy(), df[-N:].copy()
+        
+        # invert score of tail dataframe
+        tail[score] = 1 / tail[score] * scale
+        
+        df_draw = pd.concat([head,tail], ignore_index=True)
+    else:
+        df_draw = df[:N]
     
     wc = WordCloud(background_color='white', width=1600, height=800, max_words=100, collocations=False)
     wc.generate_from_frequencies(
         {line['label']: line[score] for _, line in df_draw.iterrows()}
     )
 
-    color_to_words = {
-        '#ff7f0e' : head['label'].to_list(),
-        '#1f77b4' : tail['label'].to_list()
-    }
+    if under_represented:
+        color_to_words = {
+            '#ff7f0e' : head['label'].to_list(),
+            '#1f77b4' : tail['label'].to_list()
+        }
+        # Create a color function with single tone
+        grouped_color_func = SimpleGroupedColorFunc(color_to_words)
 
-    # Create a color function with single tone
-    grouped_color_func = SimpleGroupedColorFunc(color_to_words)
+        # Apply our color function
+        wc.recolor(color_func=grouped_color_func)
 
-    # Apply our color function
-    wc.recolor(color_func=grouped_color_func)
-
-    return wc
+        return wc
+    
+    else:
+        return wc
+    
