@@ -11,7 +11,7 @@ PATH_PDB_UNIPROT_REL = '../../data/pdb_chain_uniprot.tsv'
 
 # output dataset: save pdb dataset
 OUTPUT_PATH = '../../datasets/pdb.cvs'
-OUTPUT_BG_PATH = '../../datasets/pdb_bg.cvs'
+#OUTPUT_BG_PATH = '../../datasets/pdb_bg.cvs'
 
 def main():
 
@@ -43,9 +43,9 @@ def main():
     
     
     # Create background dataset, all PDB proteins in swissprot
-    pdb_bg_dataset = pdb_rel.loc[pdb_rel.sp_primary.isin(list_human),['pdb','sp_primary','chain','sp_beg','sp_end']].copy()
-    pdb_bg_dataset.to_csv(OUTPUT_PATH, index=False)
-    print("Background dataset saved as {}".format(OUTPUT_BG_PATH))
+    #pdb_bg_dataset = pdb_rel.loc[pdb_rel.sp_primary.isin(list_human),['pdb','sp_primary','chain','sp_beg','sp_end']].copy()
+    #pdb_bg_dataset.to_csv(OUTPUT_PATH, index=False)
+    #print("Background dataset saved as {}".format(OUTPUT_BG_PATH))
 
 def getListHumans(path):
     """
