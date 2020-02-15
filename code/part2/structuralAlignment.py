@@ -32,7 +32,7 @@ def main():
 
     fig = plt.figure(figsize=(12,6))
     labelList = [pdb.split('.')[0] for pdb in pdbs]
-    dendrogram(linkage(alignments_score, method='average'), labels=labelList, leaf_rotation = 90)
+    dendrogram(linkage(alignments_score, method='median'), labels=labelList, leaf_rotation = 90)
     plt.title("Hierarchical clustering based on {}".format("TM-score" if SCORE == "tmscore" else "RMSD"))
     plt.ylabel('Distance')
     plt.tight_layout()
