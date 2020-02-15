@@ -135,5 +135,5 @@ sp|Q5MCW4|ZN569_HUMAN -            686 sp|P23615|1258-1339  -             82    
 # Target file:     ../../data/SwissProt_humans_reference_all.fasta
 # Option settings: jackhmmer -N 4 --domtblout ../../results/jackhmmsearch.hmmer_domtblout --incE 0.01 ../../data/sequenceP23615.fasta ../../data/SwissProt_humans_reference_all.fasta 
 # Current dir:     /Users/matteo/work/BiologicalData/BiologicalData/code/part1
-# Date:            Mon Feb 10 20:07:49 2020
+# Date:            Tue Feb 11 17:47:06 2020
 # [ok]
