@@ -20,10 +20,10 @@ COVERING_PDBS_PATH = "../../datasets/covering_pdbs"
 NUM_PDBS = 1
 
 # Threshold used to define if domains are overlappings
-THRESHOLD = 0.5
+THRESHOLD = 0.7
 
 # set to true to re-download everything
-DOWNLOAD_PDB = False
+DOWNLOAD_PDB = True
 
 def main():
     psiblast_sh2_positions = parsePsiBlastOutput(PSIBLAST_PATH)
@@ -52,11 +52,32 @@ def main():
             add_pdb_dict(found_pdb_score, keys, scores)
     
     print("Retrieved {} pdbs".format(len(found_pdb_score.values())))
+    covering_pdbs = list(found_pdb_score.keys())
+    # write list of pdb to use 
+    with open(COVERING_PDBS_PATH+"/list_pdbs.txt", "w") as f:
+        for pdb in covering_pdbs:
+            f.write(pdb+".pdb\n")
 
     if DOWNLOAD_PDB:
+        # check if files have already been downloaded
+        existing_pdbs = [
+            x.split('.')[0] for x in os.listdir(COVERING_PDBS_PATH) if x.split('.')[-1]=='pdb'
+            ]
+        # list of new files to download
+        new_covering_pdbs = [
+            x for x in covering_pdbs if x not in existing_pdbs
+        ]
+
+        if len(new_covering_pdbs) == 0:
+            print("Nothing to do!")
+            sys.exit(0)
+        else:
+            print("{} pdb to download".format(len(new_covering_pdbs)))
+
+        # download new files
         status = []
-        for i, pdb_id in enumerate(covering_pdbs):
-            print("Downloading {}/{}".format(i+1, len(covering_pdbs)))
+        for i, pdb_id in enumerate(new_covering_pdbs):
+            print("Downloading {}/{}".format(i+1, len(new_covering_pdbs)))
             status.append(get_pdb(pdb_id))
             
         # retry failed download
@@ -119,10 +140,12 @@ def get_pdb(pdb_id):
     try: 
         response =  urllib.request.urlopen(url).read()
         # write to file
-        with open("covering_pdbs/{}.pdb".format(pdb_id), 'w') as f:
-            f.write(response.decode())      
+        with open(COVERING_PDBS_PATH+"/{}.pdb".format(pdb_id), 'w') as f:
+            f.write(response.decode()) 
+        return 0     
     except:
-        return 'Error for id '+ pdb_id
+        print('Error for id '+ pdb_id)
+        return pdb_id
 
 if __name__ == "__main__":   
     main()
