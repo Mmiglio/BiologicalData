@@ -9,7 +9,7 @@ import os
 # Path where generated model will be stored
 MODEL_PATH = "../../models/hmm_model.hmm"
 # Path of the multiple sequence alignment
-MSA_PATH = "../../data/msa_edited_matteo.fasta"
+MSA_PATH = "../../data/msa_edited.fasta"
 
 # Path where hmmer output will be saved
 SEARCH_RESULT_PATH = "../../results/hmmsearch.hmmer_domtblout"

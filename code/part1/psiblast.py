@@ -11,7 +11,7 @@ PROFILE_PATH = "../../models/profile.pssm"
 # Path of the dataset used to create the profile
 SUBJECT_PATH = "../../data/sequenceP23615.fasta"
 # Path of the multiple sequence alignment
-MSA_PATH = "../../data/msa_edited_matteo.fasta"
+MSA_PATH = "../../data/msa_edited.fasta"
 
 # Path where psi-blast output will be saved
 SEARCH_RESULT_PATH = "../../results/psiblast_search.txt"

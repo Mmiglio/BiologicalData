@@ -1,95 +1,53 @@
-# BiologicalData
+# Biological Data
+ This goal of this project is to investigate the functional and structural properties of the SH2 domain starting from a sample sequence. Our sequence is identified by UniProt ID `P23615(1258-1339)` and can be found as fasta in `data/sequenceP23615.fasta`.
 
-Short Description
+ ## Requirements
+ The project have been developed using Python 3 with the packages cotained in `requirements.txt`.
+ It is possible to install the dependencies using `pip`:
+ >pip install -r requirements.txt
+ 
+ For the structural alignment the softwar TMalign is needed. Source code and instruction on how to compile it can be found in `code/part2/TMalign`. The executable present in the directory has been compiled on OSX. 
 
-## Domain models
+ We used jalview to edit the multiple sequence alignments.
 
-### 1: Retrieve homologous proteins in UniProt
+# Part 1: Domain Models
 
-Perform a [BLAST search](https://www.uniprot.org/blast/) with our input sequence 
+The goal of this first part is to build a PSSM and HMM models representing the asigned domain.
 
->YYFPFNGRQAEDYLRSKERGEFVIRQSSRGDDHLVITWKLDKDLFQHIDIQELEKENPLALGKVLIVDNQKYNDLDQIIVEY
+### Step 1
+The first step is retrieve homologous sequences from UniProt. To do this we used [Blast](https://www.uniprot.org/blast/) on `UniRef90` and `500` hits. These sequences are save in a fasta file `data/BLAST_uniref90.fasta`.
 
-on UniRef90 (suggested by prof. Piovesan) using `BLOSUM-62` substitution matrix, allowed gaps in the comparison and returned at most 500 hits.
+### Step 2
+The retrieved hits have been used to generate a multiple sequence alignment usign [Clustal Omega](https://www.ebi.ac.uk/Tools/msa/clustalo/). The aligment is saved in `data/msa_clustalw.fasta`. 
+We then edited the MSA usign JalView. The result is saved in `data/msa_edited.fasta`
 
-Output is saved in `data/BLAST_uniref90.fasta`
+### Step 3 
+In this step we created and evaluated the models. Models are evaluated against  Pfam annotation of the domain, `PF00017`, in the human organism.  
 
-Output is also saved as XML-file in `data/BLAST_uniref90.xml`. This file can be parsed using `code/ParseUniprotBlast.py`: this will create a new fasta file containing cut sequences (from the blast alignment information) saved as fasta in `data/BLAST_uniref90_cut.fasta`.
+To do this we need to get from UniProt all the human sequences available in SwissProt containing our domain. This can be done with the query on UniProt
 
-### 2: Generate a multiple sequence alignment (MSA)
+> organism:"Homo sapiens (Human) [9606] AND reviewed:yes  
 
-We can align sequences using [CLUSTAL Omega](https://www.ebi.ac.uk/Tools/msa/clustalo/). Remember to set output to `Pearson/FASTA`. 
+Results have been downloaded and saved in `data/SwissProt_humans_reference_all.fasta`. The list of true positive, i.e. sequences containing our domain, can be retrieved with a similar query
 
-* Result of the alignment performed using `data/BLAST_uniref90.fasta` is saved in `data/MSA_clustalomega.fasta`.
-* Result of the alignment performed using `data/BLAST_uniref90_cut.fasta` is saved in `data/MSA_clustalomega_cut.fasta`.
+> database:(type:pfam pf00017) AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]
 
-### Edit 1
-File edited usign Jalview is saved in `data/MSA_clustalomega_edited.fasta`.
+This has been saved as `data/SwissProt_humans_reference.fasta`, even if it is not necessary.
 
-### Edit 2
-File `data/MSA_clustalomega_soloseq.fasta` obtained by keeping only nucleotides aligned with the starting sequence, 118 (counting gaps) with respect to 81 starting nucleotides (as done in Pfam).
+These files can be used to crete a BLAST database (Blast indexes, phr+pin+psq files) that will be used by HMM-SEARCH and PSI-BLAST to retrieve proteins:
 
-
-### 3: Build a PSSM model starting from the MSA using BLAST
-
-We can do it with 
-
-```
-psiblast -subject data/BLAST_uniref90.fasta -in_msa data/MSA_clustalomega_soloseq.fasta -out_pssm models/profile.pssm
-```
-
-Output profile saved in `models/profile.pssm`.
-
-### 4: Build a HMM model starting from the MSA using HMMER
-
-If previous steps are correct it should be something like
-```
-hmmbuild models/hmm_model.hmm data/MSA_clustalomega_soloseq.fasta
-```
-
-HMM model saved in `models/hmm_model.hmm`.
-
-### 5: Evaluate the model against human proteins available in SwissProt
-
-Use metrics such as accuracy, precision, sensitivity, specificity and MCC (Matthews Correlation Coefficient). 
-The evaluation is composed by the steps described below.
-
-#### a: Define you ground truth/reference 
-The reference database is saved in `data/SwissProt_reference.fasta`. It can be obtained with the following query on UniProt 
->database:(type:pfam pf00017) AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]"
-
-We can use it to create a database (Blast indexes, phr+pin+psq files) that will be used by HMM-SEARCH and PSI-BLAST to retrieve proteins:
->makeblastdb -dbtype prot -in data/SwissProt_humans_reference.fasta -parse_seqids
+>makeblastdb -dbtype prot -in data/SwissProt_humans_reference_all.fasta -parse_seqids
 
 You can test if it is working correctly by searching a sequence in the database:
->blastdbcmd -entry "CRK_HUMAN" -db data/SwissProt_humans_reference.fasta
+>blastdbcmd -entry "CRK_HUMAN" -db data/SwissProt_humans_reference_all.fasta
 
-#### b: Find significant hits using HMM-SEARCH and PSI-BLAST respectively for the HMM and PSSM model
+Creation and evaluation of the models are desribed on the notebook `code/part1/ModelsEvaluation.ipynb`. Here you can find also a comparison between them. Scripts performing all the steps automatically are in `code/part1/{psiblast.py, hmm.py, jackhmmer.py}`. Other scripts in `code/part1/` contain utility functions.
+To run one of them use 
 
-We can now search in the database usign PSI-BLAST with the pssm generated in step 3:
+> python code/part1/psiblast.py
 
->psiblast -in_pssm models/profile.pssm -db data/SwissProt_humans_reference.fasta -outfmt 6 -num_iterations 3 -evalue 0.001 > results/psiblast_search.txt
+Created models are saved in the directory `models` search output on `results`. 
 
-The output is saved in `results/psiblast_search.txt`. If you want to print the results on screen remove from the command `> results/psiblast_search.txt`.
+# Part 2: Domain family characterization
 
-The search with HMMER is performed with the following command:
-> hmmsearch --domtblout results/hmmsearch.hmmer_domtblout models/hmm_model.hmm data/SwissProt_humans_reference.fasta > results/hmmsearch_results.hmmer_align
-
-and it generates two outputs `results/hmmsearch.hmmer_domtblout` and `results/hmmsearch_results.hmmer_align`.
-
-#### c: Evaluate the ability of retrieving proteins with that domain.
-
-#### d: Evaluate the ability of matching the domain position, i.e. the alignment position of the model in the retrieved proteins (Pfam reference position is available in InterPro).
-
-
-## Domain family characterization
-### Annotation enrichment
-### Structural Classification
-#### CATH
-CATH architectures mapping to our domain can be found at http://www.cathdb.info/version/v4_2_0/superfamily/3.30.505.10
-
-#### PDB
-## Notes
-
-* Reference database used in the first part of the project `SwissProt_reference.fasta`. It can be obtained with the following query on UniProt `database:(type:pfam pf00017) AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]"`
-* To visualize the generate PSSM use the following command `psiblast -subject data/BLAST_uniprot_human.fasta -in_msa data/MSA_clustalomega.fasta -out_ascii_pssm test`
+Once the list of human sequences matching the model is defined, we can look at functional and structural properties.

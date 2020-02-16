@@ -30,5 +30,5 @@ sp|P15498|VAV_HUMAN   -            845 msa_edited           -             99    
 # Target file:     ../../data/SwissProt_humans_reference_all.fasta
 # Option settings: hmmsearch --domtblout ../../results/hmmsearch.hmmer_domtblout ../../models/hmm_model.hmm ../../data/SwissProt_humans_reference_all.fasta 
 # Current dir:     /Users/matteo/work/BiologicalData/BiologicalData/code/part1
-# Date:            Sun Feb 16 16:58:12 2020
+# Date:            Sun Feb 16 19:33:09 2020
 # [ok]

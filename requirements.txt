@@ -1,0 +1,8 @@
+biopython
+numpy
+pandas
+scipy
+seaborn
+matplotlib
+wordcloud
+jupyter
