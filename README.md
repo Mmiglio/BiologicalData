@@ -1,5 +1,5 @@
 # Biological Data
- This goal of this project is to investigate the functional and structural properties of the SH2 domain starting from a sample sequence. Our sequence is identified by UniProt ID `P23615(1258-1339)` and can be found as a fasta file in `data/sequenceP23615.fasta`.
+ This goal of this project is to investigate the functional and structural properties of the SH2 domain starting from a sample sequence. Our sequence is identified by UniProt ID `P23615(1258-1339)` and can be found as a fasta file `data/sequenceP23615.fasta`.
 
  ## Requirements
  The project have been developed using Python 3 with the packages cotained in `requirements.txt`.
@@ -58,7 +58,7 @@ To run one of them use
 python code/part1/psiblast.py
 ```
 
-Created models are saved in the directory `models` search output on `results`. 
+Created models are saved in the directory `models` and search output on `results`. 
 Parameters for this scripts are contained in the headers. 
 
 # Part 2: Domain family characterization
@@ -78,4 +78,4 @@ Together with the sequence and PDB id we saved the position of the PDB in the se
 
 The last dataset is called `STRING network`, composed by all the proteins in the original dataset plus all direct interactors found in the `STRING database`. This dataset is created with the script `code/part2/string_network.py` and save in `datasets/string.txt`.
 
-In the notebooks `code/part2/{GeneOntology.ipynb, DiseaseOntology.ipynb}` the enrichment is performed.
+In the notebooks `code/part2/{GeneOntology.ipynb, DiseaseOntology.ipynb}` the background datasets are identified and the enrichment is performed. 
