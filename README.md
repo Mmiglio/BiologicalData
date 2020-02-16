@@ -15,24 +15,24 @@
 The goal of this first part is to build a PSSM and HMM models representing the asigned domain.
 
 ### Step 1
-The first step is retrieve homologous sequences from UniProt. To do this we used [Blast](https://www.uniprot.org/blast/) on `UniRef90` and `500` hits. These sequences are save in a fasta file `data/BLAST_uniref90.fasta`.
+The first step is retrieve homologous sequences from UniProt. To do this we used [Blast](https://www.uniprot.org/blast/) on `UniRef90` and `500` hits. These sequences are save in a fasta file `data/BLAST_uniref90.fasta`.
 
 ### Step 2
 The retrieved hits have been used to generate a multiple sequence alignment usign [Clustal Omega](https://www.ebi.ac.uk/Tools/msa/clustalo/). The aligment is saved in `data/msa_clustalw.fasta`. 
-We then edited the MSA usign JalView. The result is saved in `data/msa_edited.fasta`
+We then edited the MSA usign JalView. The result is saved in `data/msa_edited.fasta`
 
 ### Step 3 
-In this step we created and evaluated the models. Models are evaluated against  Pfam annotation of the domain, `PF00017`, in the human organism.  
+In this step we created and evaluated the models. Models are evaluated against  Pfam annotation of the domain, `PF00017`, in the human organism.  
 
 To do this we need to get from UniProt all the human sequences available in SwissProt containing our domain. This can be done with the query on UniProt
 
 > organism:"Homo sapiens (Human) [9606] AND reviewed:yes  
 
-Results have been downloaded and saved in `data/SwissProt_humans_reference_all.fasta`. The list of true positive, i.e. sequences containing our domain, can be retrieved with a similar query
+Results have been downloaded and saved in `data/SwissProt_humans_reference_all.fasta`. The list of true positive, i.e. sequences containing our domain, can be retrieved with a similar query
 
 > database:(type:pfam pf00017) AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]
 
-This has been saved as `data/SwissProt_humans_reference.fasta`, even if it is not necessary.
+This has been saved as `data/SwissProt_humans_reference.fasta`, even if it is not necessary.
 
 These files can be used to crete a BLAST database (Blast indexes, phr+pin+psq files) that will be used by HMM-SEARCH and PSI-BLAST to retrieve proteins:
 
