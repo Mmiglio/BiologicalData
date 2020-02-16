@@ -4,8 +4,11 @@
  ## Requirements
  The project have been developed using Python 3 with the packages cotained in `requirements.txt`.
  It is possible to install the dependencies using `pip`:
- >pip install -r requirements.txt
  
+```
+ pip install -r requirements.txt
+```
+
  For the structural alignment the softwar TMalign is needed. Source code and instruction on how to compile it can be found in `code/part2/TMalign`. The executable present in the directory has been compiled on OSX. 
 
  We used jalview to edit the multiple sequence alignments.
@@ -30,21 +33,30 @@ To do this we need to get from UniProt all the human sequences available in Swis
 
 Results have been downloaded and saved in `data/SwissProt_humans_reference_all.fasta`. The list of true positive, i.e. sequences containing our domain, can be retrieved with a similar query
 
-> database:(type:pfam pf00017) AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]
+```
+database:(type:pfam pf00017) AND reviewed:yes AND organism:"Homo sapiens (Human) [9606]
+```
 
 This has been saved as `data/SwissProt_humans_reference.fasta`, even if it is not necessary.
 
 These files can be used to crete a BLAST database (Blast indexes, phr+pin+psq files) that will be used by HMM-SEARCH and PSI-BLAST to retrieve proteins:
 
->makeblastdb -dbtype prot -in data/SwissProt_humans_reference_all.fasta -parse_seqids
+```
+makeblastdb -dbtype prot -in data/SwissProt_humans_reference_all.fasta -parse_seqids
+```
 
 You can test if it is working correctly by searching a sequence in the database:
->blastdbcmd -entry "CRK_HUMAN" -db data/SwissProt_humans_reference_all.fasta
+
+```
+blastdbcmd -entry "CRK_HUMAN" -db data/SwissProt_humans_reference_all.fasta
+```
 
 Creation and evaluation of the models are desribed on the notebook `code/part1/ModelsEvaluation.ipynb`. Here you can find also a comparison between them. Scripts performing all the steps automatically are in `code/part1/{psiblast.py, hmm.py, jackhmmer.py}`. Other scripts in `code/part1/` contain utility functions.
 To run one of them use 
 
-> python code/part1/psiblast.py
+```
+python code/part1/psiblast.py
+```
 
 Created models are saved in the directory `models` search output on `results`. 
 
