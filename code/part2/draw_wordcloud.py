@@ -66,14 +66,14 @@ class GroupedColorFunc(object):
         return self.get_color_func(word)(word, **kwargs)
 
 
-def draw_word_cloud(df, score='OddRatio', N=20, under_represented=False, scale=2.0):
+def draw_word_cloud(df, score='OddRatio', N=20, N_under_represented=0, under_represented=False, scale=2.0):
     """
     Draw first and last N descriptions of df
     Scale less abboundant terms by a factor scale
     """
     if under_represented:
         # draw also underepresented words
-        head, tail = df[:N].copy(), df[-N:].copy()
+        head, tail = df[:N].copy(), df[-N_under_represented:].copy()
         
         # invert score of tail dataframe
         tail[score] = 1 / tail[score] * scale
