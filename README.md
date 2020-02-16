@@ -1,5 +1,5 @@
 # Biological Data
- This goal of this project is to investigate the functional and structural properties of the SH2 domain starting from a sample sequence. Our sequence is identified by UniProt ID `P23615(1258-1339)` and can be found as fasta in `data/sequenceP23615.fasta`.
+ This goal of this project is to investigate the functional and structural properties of the SH2 domain starting from a sample sequence. Our sequence is identified by UniProt ID `P23615(1258-1339)` and can be found as a fasta file in `data/sequenceP23615.fasta`.
 
  ## Requirements
  The project have been developed using Python 3 with the packages cotained in `requirements.txt`.
@@ -59,7 +59,23 @@ python code/part1/psiblast.py
 ```
 
 Created models are saved in the directory `models` search output on `results`. 
+Parameters for this scripts are contained in the headers. 
 
 # Part 2: Domain family characterization
 
 Once the list of human sequences matching the model is defined, we can look at functional and structural properties.
+
+The first step consists in the creation of four different datasets that will be enriched (gene ontology and disease ontology). 
+
+The first one is called `Original dataset` and is composed of the protein retrieved by our model against human proteins in SwissProt. It can be found in `datasets/original.txt` and it is created by the scripts described in part 1.   
+
+The second is called `Architectures datasets`. This dataset is composed by multiple datasets, where each of them contains proteins of the original dataset with the same combination of Pfam domains. The script used to create this dataset is `code/part2/architectures_dataset.py` and it saves the dataset in `datasets/architectures_datasets.json`. Domains are used as key of the json.
+
+The third is called `PDB_network` and it contains all the sequences of the original dataset with a PDB plus other human proteins found as chains in the same PDB.
+The dataset is created with the script `code/part2/pdb_network.py` and saved in `datasets/pdb.csv`.
+To find the PDBs the script utilize the file `data/pdb_chain_uniprot.tsv.gz` that can be downloaded from [SIFTS](https://www.ebi.ac.uk/pdbe/docs/sifts/quick.html)
+Together with the sequence and PDB id we saved the position of the PDB in the sequences. This will be used later on to find PDBs covering our domain.
+
+The last dataset is called `STRING network`, composed by all the proteins in the original dataset plus all direct interactors found in the `STRING database`. This dataset is created with the script `code/part2/string_network.py` and save in `datasets/string.txt`.
+
+In the notebooks `code/part2/{GeneOntology.ipynb, DiseaseOntology.ipynb}` the enrichment is performed.
