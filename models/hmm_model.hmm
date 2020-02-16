@@ -1,5 +1,5 @@
 HMMER3/f [3.2.1 | June 2018]
-NAME  msa_edited_matteo
+NAME  msa_edited
 LENG  99
 ALPH  amino
 RF    no
@@ -7,7 +7,7 @@ MM    no
 CONS  yes
 CS    no
 MAP   yes
-DATE  Tue Feb 11 17:43:57 2020
+DATE  Sun Feb 16 16:58:12 2020
 NSEQ  246
 EFFN  0.867096
 CKSUM 3932225180

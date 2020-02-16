@@ -52,7 +52,9 @@ def main():
 
     # evaluate ability of retrieving sequences containing SH2
     print("\nAbility of retreiving sequences containing SH2:")
-    evaluateSequencesSH2(jackhmm_sh2_positions, reference_human_sh2, num_human_sequences)
+    resulting_metrics = evaluateSequencesSH2(
+        jackhmm_sh2_positions, reference_human_sh2, num_human_sequences
+        )
 
     # Evaluate ability of matching domains
     print("\nAbility of matching domains")

@@ -1,6 +1,6 @@
 import math
 
-def computeMetrics(true_positive, true_negative, false_positive, false_negative):
+def computeMetrics(true_positive, true_negative, false_positive, false_negative, show=True):
     """
     Compute a set of metrics starting from true positives, true negatives etc.
     """
@@ -14,13 +14,22 @@ def computeMetrics(true_positive, true_negative, false_positive, false_negative)
         (true_negative + false_positive) * (true_negative + false_negative)
     ))
     
-    print("\t*Accuracy: {:.2f}".format(accuracy))
-    print("\t*Precision: {:.2f}".format(precision))
-    print("\t*Sensitivity: {:.2f}".format(sensitivity))
-    print("\t*Specificity: {:.2f}".format(specificity))
-    print("\t*F1 score: {:.2f}".format(f1))
-    print("\t*MCC: {:.2f}".format(mcc)) 
-    print("")
+    if show:
+        print("\t*Accuracy: {:.2f}".format(accuracy))
+        print("\t*Precision: {:.2f}".format(precision))
+        print("\t*Sensitivity: {:.2f}".format(sensitivity))
+        print("\t*Specificity: {:.2f}".format(specificity))
+        print("\t*F1 score: {:.2f}".format(f1))
+        print("\t*MCC: {:.2f}".format(mcc)) 
+        print("")
+
+    return {
+        "Precision": precision,
+        "Sensitivity": sensitivity,
+        "Specificity": specificity,
+        "F1-score": f1,
+        "MCC": mcc
+    }
 
 def createPositionSet(positions_list):
     """
@@ -50,12 +59,14 @@ def evaluateSequencesSH2(retrieved_sequences, ground_truth, num_sequences):
     false_positive = len(set(retrieved_sequences)) - true_positive
     true_negative = num_sequences - true_positive - false_positive - false_negative
     
-    computeMetrics(
+    metrics = computeMetrics(
         true_positive,
         true_negative,
         false_positive,
         false_negative
     )  
+
+    return metrics
 
 def evaluatePositionsSH2(predicted_positions_sh2, reference_positions_sh2):
     """
@@ -66,6 +77,9 @@ def evaluatePositionsSH2(predicted_positions_sh2, reference_positions_sh2):
     list_fp = []
     list_fn = []
     list_tn = []
+    
+    # scores per sequence
+    list_scores = []
 
     for seqid in predicted_positions_sh2:
 
@@ -85,6 +99,15 @@ def evaluatePositionsSH2(predicted_positions_sh2, reference_positions_sh2):
             list_fp.append(false_positive)
             list_fn.append(false_negative)
             list_tn.append(true_negative)
+            
+            list_scores.append(
+                computeMetrics(
+                    true_positive=true_positive,
+                    true_negative=true_negative,
+                    false_positive=false_positive,
+                    false_negative=false_negative,
+                    show=False)
+            )
 
         else:
             # false positive sequence
@@ -94,15 +117,25 @@ def evaluatePositionsSH2(predicted_positions_sh2, reference_positions_sh2):
             false_positive = len(identified_positions)
             false_negative = 0
             true_negative = 0
+            
+            list_scores.append(
+                {
+                    'Precision': 0,
+                    'Sensitivity': 0,
+                    'F1-score': 0
+                }
+            )
 
             list_tp.append(true_positive)
             list_fp.append(false_positive)
             list_fn.append(false_negative)
             list_tn.append(true_negative)
-            
-    computeMetrics(
+                   
+    metrics_global = computeMetrics(
         true_positive=sum(list_tp),
         true_negative=sum(list_tn),
         false_positive=sum(list_fp),
         false_negative=sum(list_fn)
     )
+    
+    return metrics_global, list_scores

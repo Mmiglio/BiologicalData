@@ -3,12 +3,12 @@
 # Copyright (C) 2018 Howard Hughes Medical Institute.
 # Freely distributed under the BSD open source license.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# query HMM file:                  ../models/hmm_model.hmm
-# target sequence database:        ../data/SwissProt_humans_reference_all.fasta
-# per-dom hits tabular output:     ../results/hmmsearch.hmmer_domtblout
+# query HMM file:                  ../../models/hmm_model.hmm
+# target sequence database:        ../../data/SwissProt_humans_reference_all.fasta
+# per-dom hits tabular output:     ../../results/hmmsearch.hmmer_domtblout
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-Query:       msa_edited_matteo  [M=99]
+Query:       msa_edited  [M=99]
 Scores for complete sequences (score includes all domains):
    --- full sequence ---   --- best 1 domain ---    -#dom-
     E-value  score  bias    E-value  score  bias    exp  N  Sequence              Description
@@ -39,12 +39,12 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: 115.7 bits;  conditional E-value: 6e-37
-      msa_edited_matteo    1 plfkpfnskqaeeyLaskerGdvviRpsskgndhlavtwkvdddvyqhidvleldkenefslgkvlkvegkakysdldelivehvk 86  
+             msa_edited    1 plfkpfnskqaeeyLaskerGdvviRpsskgndhlavtwkvdddvyqhidvleldkenefslgkvlkvegkakysdldelivehvk 86  
                              p f+++n kqae+++++ ++Gdv+iRpsskg++hl+vtwkv+d++yqh+dv e  ken fslg +l ++++ +++dlde+++++v+
   sp|Q7KZ85|SPT6H_HUMAN 1333 PSFHNINFKQAEKMMETMDQGDVIIRPSSKGENHLTVTWKVSDGIYQHVDVREEGKENAFSLGATLWINSE-EFEDLDEIVARYVQ 1417
                              78******************************************************************986.************** PP
 
-      msa_edited_matteo   87 amarkveellkh 98  
+             msa_edited   87 amarkveellkh 98  
                              +ma   ++ll+h
   sp|Q7KZ85|SPT6H_HUMAN 1418 PMASFARDLLNH 1429
                              ***999999887 PP
@@ -56,7 +56,7 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: 17.8 bits;  conditional E-value: 2e-06
-     msa_edited_matteo   5 pfnskqaeeyLaskerGdvviRpsskgndhlavtwkvdddvyqhidvleldke 57 
+            msa_edited   5 pfnskqaeeyLaskerGdvviRpsskgndhlavtwkvdddvyqhidvleldke 57 
                            +++ +q ++ L+s+++G ++iR+     + +a++ k +d+v +hi v+e+d+ 
   sp|P52735|VAV2_HUMAN 677 NMERQQTDNLLKSHASGTYLIRERPAEAERFAISIKFNDEV-KHIKVVEKDNW 728
                            78999**********************************98.9******9864 PP
@@ -68,7 +68,7 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: 18.1 bits;  conditional E-value: 1.6e-06
-      msa_edited_matteo   5 pfnskqaeeyLaskerGdvviRpsskgndhlavtwkvdddvyqhidvleldkenefs 61 
+             msa_edited   5 pfnskqaeeyLaskerGdvviRpsskgndhlavtwkvdddvyqhidvleldkenefs 61 
                              ++ +qae+ L  ke G ++iR s      ++++ + +ddv qh  v+  +k n f 
   sp|O75791|GRAP2_HUMAN  62 GLSRHQAENLLMGKEVGFFIIRASQSSPGDFSISVRHEDDV-QHFKVMRDNKGNYFL 117
                             57789*******************************99998.9*****999998775 PP
@@ -80,7 +80,7 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: 17.0 bits;  conditional E-value: 3.6e-06
-      msa_edited_matteo   3 fkpfnskqaeeyLaskerGdvviRpsskgndhlavtwkvdddvyqhidvleldkenefslgkvlkvegk.akysdldelivehvk 86 
+             msa_edited   3 fkpfnskqaeeyLaskerGdvviRpsskgndhlavtwkvdddvyqhidvleldkenefslgkvlkvegk.akysdldelivehvk 86 
                             + ++  ++a+e L++ ++G ++iR+ss+ +  l+++ k + +   ++ +    ++ +f l  ++ v++k ++++ + +li  +v+
   sp|O14508|SOCS2_HUMAN  50 WGSMTVNEAKEKLKEAPEGTFLIRDSSHSDYLLTISVKTSAGPT-NLRI--EYQDGKFRLDSIICVKSKlKQFDSVVHLIDYYVQ 131
                             6788999***********************9*****99887642.2222..2334556666666665542345555555555555 PP
@@ -94,19 +94,19 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: 0.2 bits;  conditional E-value: 0.62
-     msa_edited_matteo   5 pfnskqaeeyLaskerGdvviRpssk 30 
+            msa_edited   5 pfnskqaeeyLaskerGdvviRpssk 30 
                             ++ ++ +e L++ + G +++R++s 
   sp|O00459|P85B_HUMAN 334 DISREEVNEKLRDTPDGTFLVRDASS 359
                            5677888999************8553 PP
 
   == domain 2  score: -0.5 bits;  conditional E-value: 1
-     msa_edited_matteo  59 efslgkvlkvegkakysd....ldeliveh 84 
+            msa_edited  59 efslgkvlkvegkakysd....ldeliveh 84 
                              ++g +lkv ++ +y+d     d+l  e+
   sp|O00459|P85B_HUMAN 439 VEAVGAQLKVYHQ-QYQDksreYDQLYEEY 467
                            34799*****986.9987222245555544 PP
 
   == domain 3  score: 12.5 bits;  conditional E-value: 9.3e-05
-     msa_edited_matteo   5 pfnskqaeeyLaskerGdvviRpssk 30 
+            msa_edited   5 pfnskqaeeyLaskerGdvviRpssk 30 
                            ++n +qaee+L+ k+ G ++iR+ss+
   sp|O00459|P85B_HUMAN 626 KINRTQAEEMLSGKRDGTFLIRESSQ 651
                            6899********************96 PP
@@ -119,13 +119,13 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: 0.2 bits;  conditional E-value: 0.61
-     msa_edited_matteo  6 fnskqaeeyLaskerGdvviRpsskg 31
+            msa_edited  6 fnskqaeeyLaskerGdvviRpsskg 31
                           ++ ++ ++ L++ + G +++R++s  
   sp|Q92569|P55G_HUMAN 70 ISREEVNDKLRDMPDGTFLVRDASTK 95
                           667788999************98754 PP
 
   == domain 2  score: 11.3 bits;  conditional E-value: 0.00022
-     msa_edited_matteo   5 pfnskqaeeyLaskerGdvviRpsskg 31 
+            msa_edited   5 pfnskqaeeyLaskerGdvviRpsskg 31 
                             +n  qae+ L  k+ G ++iR+ssk 
   sp|Q92569|P55G_HUMAN 362 DINRVQAEDLLYGKPDGAFLIRESSKK 388
                            6899*********************85 PP
@@ -138,13 +138,13 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: -2.8 bits;  conditional E-value: 5.5
-      msa_edited_matteo 51 vleldkenefslgk 64
+             msa_edited 51 vleldkenefslgk 64
                            v+el+k+ e ++g+
   sp|P51692|STA5B_HUMAN 65 VQELQKKAEHQVGE 78
                            799******99996 PP
 
   == domain 2  score: 12.8 bits;  conditional E-value: 7.2e-05
-      msa_edited_matteo   6 fnskqaeeyLaskerGdvviRpsskgndhlavtwkvdd 43 
+             msa_edited   6 fnskqaeeyLaskerGdvviRpsskgndhlavtwkvdd 43 
                             +n++qa++ L +k+ G +++R s      ++++wk d 
   sp|P51692|STA5B_HUMAN 598 VNKQQAHDLLINKPDGTFLLRFSDSEIGGITIAWKFDS 635
                             699********************************986 PP
@@ -156,7 +156,7 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: 12.3 bits;  conditional E-value: 0.00011
-     msa_edited_matteo   2 lfkpfnskqaeeyLask.erGdvviRpsskgndhlavtwkvdddvyqhidvl 52 
+            msa_edited   2 lfkpfnskqaeeyLask.erGdvviRpsskgndhlavtwkvdddvyqhidvl 52 
                            ++ ++  +qae  L+++ ++Gd++iR+s    + ++v+ k +    +h  v+
   sp|P16333|NCK1_HUMAN 283 YYGKVTRHQAEMALNERgHEGDFLIRDSESSPNDFSVSLKAQG-KNKHFKVQ 333
                            57788999******998478******************99754.35666554 PP
@@ -169,13 +169,13 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: -3.0 bits;  conditional E-value: 6
-      msa_edited_matteo 51 vleldkenefslgk 64
+             msa_edited 51 vleldkenefslgk 64
                            v+el+k+ e ++g+
   sp|P42229|STA5A_HUMAN 65 VQELQKKAEHQVGE 78
                            799******99996 PP
 
   == domain 2  score: 12.0 bits;  conditional E-value: 0.00013
-      msa_edited_matteo   6 fnskqaeeyLaskerGdvviRpsskgndhlavtwkvd 42 
+             msa_edited   6 fnskqaeeyLaskerGdvviRpsskgndhlavtwkvd 42 
                             +n++qa++ L +k+ G +++R s      ++++wk d
   sp|P42229|STA5A_HUMAN 598 VNKQQAHDLLINKPDGTFLLRFSDSEIGGITIAWKFD 634
                             699********************************87 PP
@@ -187,7 +187,7 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: 12.7 bits;  conditional E-value: 7.6e-05
-      msa_edited_matteo   5 pfnskqaeeyLaskerGdvviRpsskgndhlavtwkvdd 43 
+             msa_edited   5 pfnskqaeeyLaskerGdvviRpsskgndhlavtwkvdd 43 
                             ++  +qa e L+++e G +viR+ss  +  + ++ kv++
   sp|Q8IZW8|TENS4_HUMAN 453 NITREQAIELLRKEEPGAFVIRDSSSYRGSFGLALKVQE 491
                             46789********************99999888888875 PP
@@ -199,7 +199,7 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: 12.5 bits;  conditional E-value: 8.8e-05
-     msa_edited_matteo   3 fkpfnskqaeeyLask.erGdvviRpsskgndhlavtwkvdddvyqhidvle 53 
+            msa_edited   3 fkpfnskqaeeyLask.erGdvviRpsskgndhlavtwkvdddvyqhidvle 53 
                            f ++  ++aee+L+++ + G ++iR+s      ++++ k  +dv qh  vl 
   sp|P62993|GRB2_HUMAN  62 FGKIPRAKAEEMLSKQrHDGAFLIRESESAPGDFSLSVKFGNDV-QHFKVLR 112
                            66777899*****865268**********************998.8888875 PP
@@ -211,7 +211,7 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: 12.4 bits;  conditional E-value: 9.7e-05
-     msa_edited_matteo  12 eeyLaskerGdvviRpss.kgndh.lavtwkvdddvyqhidvleldkenefslgkvlkvegkakysdldeliveh 84 
+            msa_edited  12 eeyLaskerGdvviRpss.kgndh.lavtwkvdddvyqhidvleldkenefslgkvlkvegkakysdldeliveh 84 
                            e ++++++ G++++R+ s k ++   +++   +++vy ++ +  l+++++f+lg  l+ ++  k++ ++++i ++
   sp|Q7Z7G1|CLNK_HUMAN 321 EAFMKENKDGSFLVRDCStKSKEEpYVLAVFYENKVY-NVKIRFLERNQQFALGTGLRGDE--KFDSVEDIIEHY 392
                            67999**********8652555442445555678888.599****************9877..5******99877 PP
@@ -223,7 +223,7 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: 10.6 bits;  conditional E-value: 0.00035
-     msa_edited_matteo   2 lfkpfnskqaeeyLaske.rGdvviRpsskgndhlavtwkvdddvyqhidvleldkenefslgkvlkvegkakysdldeliveh 84 
+            msa_edited   2 lfkpfnskqaeeyLaske.rGdvviRpsskgndhlavtwkvdddvyqhidvleldkenefslgkvlkvegkakysdldeliveh 84 
                            ++ ++  +qae  L+++  +Gd++iR+s      ++v+ k +    +h  v+ +d        +v+ ++++ +++ +del+ ++
   sp|O43639|NCK2_HUMAN 286 YYGNVTRHQAECALNERGvEGDFLIRDSESSPSDFSVSLKASG-KNKHFKVQLVD--------NVYCIGQR-RFHTMDELVEHY 359
                            6788999*******998637*******************9764.46777776544........34444443.666666666555 PP
@@ -236,13 +236,13 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: -2.4 bits;  conditional E-value: 3.9
-      msa_edited_matteo  49 idvleldkenefslgkvlkvegk 71 
+             msa_edited  49 idvleldkenefslgkvlkvegk 71 
                              +vle +k+  ++  +   ve++
   sp|Q9ULZ2|STAP1_HUMAN 139 HEVLEREKKRRIETEQSTSVEKE 161
                             57899999988888877777765 PP
 
   == domain 2  score: 11.3 bits;  conditional E-value: 0.00021
-      msa_edited_matteo   2 lfkpfnskqaeeyLaske.rGdvviRpsskgndh.lavtwkvdddvyqhidvleldkenefslgkvl 66 
+             msa_edited   2 lfkpfnskqaeeyLaske.rGdvviRpsskgndh.lavtwkvdddvyqhidvleldkenefslgkvl 66 
                              f +++ k+a+e+L++++  G++++Rp s  +++ +++   +d    +h  v+ + ++  ++l k +
   sp|Q9ULZ2|STAP1_HUMAN 178 CFYTVSRKEATEMLQKNPsLGNMILRPGSDSRNYsITIRQEIDIPRIKHYKVMSVGQNYTIELEKPV 244
                             5889999*******987526*******9988764255555555555555555555555555444444 PP
@@ -254,7 +254,7 @@ Domain annotation for each sequence (and alignments):
 
   Alignments for each domain:
   == domain 1  score: 11.2 bits;  conditional E-value: 0.00023
-    msa_edited_matteo   5 pfnskqaeeyLaskerGdvviRpsskgndhlavtwkvdddvyqhidvlel 54 
+           msa_edited   5 pfnskqaeeyLaskerGdvviRpsskgndhlavtwkvdddvyqhidvlel 54 
                           p++ + ae++La+++ G +++R+  k    +a++ k + +v +hi ++  
   sp|P15498|VAV_HUMAN 675 PMERAGAESILANRSDGTFLVRQRVKDAAEFAISIKYNVEV-KHIKIMTA 723
                           678889******************************98887.88888754 PP
@@ -271,7 +271,7 @@ Passed Vit filter:                        45  (0.00220946); expected 20.4 (0.001
 Passed Fwd filter:                        15  (0.000736485); expected 0.2 (1e-05)
 Initial search space (Z):              20367  [actual number of targets]
 Domain search space  (domZ):              15  [number of targets reported over threshold]
-# CPU time: 0.17u 0.02s 00:00:00.19 Elapsed: 00:00:00.10
-# Mc/sec: 10469.36
+# CPU time: 0.16u 0.02s 00:00:00.18 Elapsed: 00:00:00.13
+# Mc/sec: 8502.45
 //
 [ok]

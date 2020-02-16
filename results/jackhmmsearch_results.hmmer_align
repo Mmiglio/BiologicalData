@@ -3,10 +3,10 @@
 # Copyright (C) 2018 Howard Hughes Medical Institute.
 # Freely distributed under the BSD open source license.
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# query sequence file:             ../data/sequenceP23615.fasta
-# target sequence database:        ../data/SwissProt_humans_reference_all.fasta
+# query sequence file:             ../../data/sequenceP23615.fasta
+# target sequence database:        ../../data/SwissProt_humans_reference_all.fasta
 # maximum iterations set to:       4
-# per-dom hits tabular output:     ../results/jackhmmsearch.hmmer_domtblout
+# per-dom hits tabular output:     ../../results/jackhmmsearch.hmmer_domtblout
 # sequence inclusion threshold:    E-value <= 0.01
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -51,8 +51,8 @@ Passed Vit filter:                        41  (0.00201306); expected 20.4 (0.001
 Passed Fwd filter:                         1  (4.9099e-05); expected 0.2 (1e-05)
 Initial search space (Z):              20367  [actual number of targets]
 Domain search space  (domZ):               1  [number of targets reported over threshold]
-# CPU time: 0.13u 0.01s 00:00:00.14 Elapsed: 00:00:00.08
-# Mc/sec: 10550.83
+# CPU time: 0.15u 0.01s 00:00:00.16 Elapsed: 00:00:00.11
+# Mc/sec: 8268.00
 
 @@ New targets included:   1
 @@ New alignment includes: 2 subseqs (was 1), including original query
@@ -200,8 +200,8 @@ Passed Vit filter:                        46  (0.00225856); expected 20.4 (0.001
 Passed Fwd filter:                         6  (0.000294594); expected 0.2 (1e-05)
 Initial search space (Z):              20367  [actual number of targets]
 Domain search space  (domZ):               6  [number of targets reported over threshold]
-# CPU time: 0.16u 0.01s 00:00:00.17 Elapsed: 00:00:00.10
-# Mc/sec: 8496.40
+# CPU time: 0.18u 0.01s 00:00:00.19 Elapsed: 00:00:00.13
+# Mc/sec: 6709.06
 
 @@ New targets included:   4
 @@ New alignment includes: 6 subseqs (was 2), including original query
@@ -1623,8 +1623,8 @@ Passed Vit filter:                       116  (0.00569549); expected 20.4 (0.001
 Passed Fwd filter:                        91  (0.00446801); expected 0.2 (1e-05)
 Initial search space (Z):              20367  [actual number of targets]
 Domain search space  (domZ):              91  [number of targets reported over threshold]
-# CPU time: 0.23u 0.01s 00:00:00.24 Elapsed: 00:00:00.12
-# Mc/sec: 7299.97
+# CPU time: 0.23u 0.02s 00:00:00.25 Elapsed: 00:00:00.17
+# Mc/sec: 5333.20
 
 @@ New targets included:   72
 @@ New alignment includes: 86 subseqs (was 6), including original query
@@ -3414,8 +3414,8 @@ Passed Vit filter:                       128  (0.00628468); expected 20.4 (0.001
 Passed Fwd filter:                       109  (0.00535179); expected 0.2 (1e-05)
 Initial search space (Z):              20367  [actual number of targets]
 Domain search space  (domZ):             109  [number of targets reported over threshold]
-# CPU time: 0.24u 0.00s 00:00:00.24 Elapsed: 00:00:00.13
-# Mc/sec: 6806.61
+# CPU time: 0.25u 0.01s 00:00:00.26 Elapsed: 00:00:00.22
+# Mc/sec: 4160.42
 
 @@ New targets included:   28
 @@ New alignment includes: 115 subseqs (was 86), including original query
