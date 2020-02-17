@@ -1,6 +1,7 @@
 from wordcloud import WordCloud, get_single_color_func
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 
 class SimpleGroupedColorFunc(object):
@@ -76,16 +77,23 @@ def draw_word_cloud(df, score='OddRatio', N=20, N_under_represented=0, under_rep
         head, tail = df[:N].copy(), df[-N_under_represented:].copy()
         
         # invert score of tail dataframe
-        tail[score] = 1 / tail[score] * scale
+        if score=='OddRatio':
+            tail[score] = 1 / tail[score] * scale
         
         df_draw = pd.concat([head,tail], ignore_index=True)
     else:
         df_draw = df[:N]
     
     wc = WordCloud(background_color='white', width=1600, height=800, max_words=100, collocations=False)
-    wc.generate_from_frequencies(
-        {line['label']: line[score] for _, line in df_draw.iterrows()}
-    )
+    
+    if score=='p-value':
+        wc.generate_from_frequencies(
+            {line['label']: np.log(1/line[score]) for _, line in df_draw.iterrows()}
+        )
+    else:
+        wc.generate_from_frequencies(
+            {line['label']: line[score] for _, line in df_draw.iterrows()}
+        )
 
     if under_represented:
         color_to_words = {
