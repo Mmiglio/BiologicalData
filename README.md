@@ -1,9 +1,9 @@
 # Biological Data
- This goal of this project is to investigate the functional and structural properties of the SH2 domain starting from a sample sequence. Our sequence is identified by UniProt ID `P23615(1258-1339)` and can be found in fasta format in `data/sequenceP23615.fasta`.
+This goal of this project is to investigate the functional and structural properties of the SH2 domain starting from a sample sequence. Our sequence is identified by UniProt ID `P23615(1258-1339)` and can be found in fasta format in `data/sequenceP23615.fasta`.
 
- ## Requirements
- The project have been developed using Python 3 with the packages cotained in `requirements.txt`.
- It is possible to install the dependencies using `pip`:
+## Requirements
+The project have been developed using Python 3 with the packages cotained in `requirements.txt`.
+It is possible to install the dependencies using `pip`:
  
 ```
  pip install -r requirements.txt

@@ -1,3 +1,4 @@
+import subprocess
 import math
 
 def computeMetrics(true_positive, true_negative, false_positive, false_negative, show=True):
@@ -68,6 +69,21 @@ def evaluateSequencesSH2(retrieved_sequences, ground_truth, num_sequences):
 
     return metrics
 
+
+def getSeqLength(entry):
+    """
+    Get sequence length from reference dataset
+    """   
+    cmd = 'blastdbcmd -entry "{}" -db ../../data/SwissProt_humans_reference_all.fasta'.format(entry)
+    results = subprocess.run(
+            cmd, shell=True, universal_newlines=True, 
+            stdout=subprocess.PIPE
+            ).stdout
+    results = results.split('\n')
+    results.pop(0)
+    return len("".join(results))
+
+
 def evaluatePositionsSH2(predicted_positions_sh2, reference_positions_sh2):
     """
     predicted_positions_sh2: dict of the type {'P16885':[{'start': 532, 'end': 617}], ...}
@@ -118,11 +134,15 @@ def evaluatePositionsSH2(predicted_positions_sh2, reference_positions_sh2):
             false_negative = 0
             true_negative = 0
             
+            lenSeq = getSeqLength(seqid)
+            
             list_scores.append(
                 {
                     'Precision': 0,
                     'Sensitivity': 0,
-                    'F1-score': 0
+                    'Specificity': lenSeq / (lenSeq + false_positive),
+                    'F1-score': 0,
+                    'MCC': 0
                 }
             )
 
