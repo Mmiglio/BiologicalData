@@ -18,7 +18,7 @@
 The goal of this first part is to build a PSSM and HMM models representing the asigned domain.
 
 ### Step 1
-The first step is retrieve homologous sequences from UniProt. To do this we used [Blast](https://www.uniprot.org/blast/) on `UniRef90` and `500` hits. These sequences are save in a fasta file `data/BLAST_uniref90.fasta`.
+The first step is retrieve homologous sequences from UniProt. To do this we used [Blast](https://www.uniprot.org/blast/) on `UniRef90` and `500` hits. These sequences are save in a fasta file `data/BLAST_uniref90.fasta`.
 
 ### Step 2
 The retrieved hits have been used to generate a multiple sequence alignment usign [Clustal Omega](https://www.ebi.ac.uk/Tools/msa/clustalo/). The aligment is saved in `data/msa_clustalw.fasta`. 
