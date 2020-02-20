@@ -10,6 +10,8 @@
 ```
 
  For the structural alignment the softwar TMalign is needed. Source code and instruction on how to compile it can be found in `code/part2/TMalign`. The executable present in the directory has been compiled on OSX. 
+ 
+ Moreover [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) and [HMMER](http://hmmer.org/download.html) are required and should be accessible from PATH.
 
  We used jalview to edit the multiple sequence alignments.
 
